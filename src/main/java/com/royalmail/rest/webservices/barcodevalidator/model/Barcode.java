@@ -68,7 +68,7 @@ public class Barcode {
 	private static int calculateCheckDigit(String sourceData) {
 		int sum = 0;
 		for (int i = 0; i < WEIGHTAGE.length; i++) {			
-			sum = sum + (Character.getNumericValue(sourceData.charAt(i)) * WEIGHTAGE[i]);
+			sum += (Character.getNumericValue(sourceData.charAt(i)) * WEIGHTAGE[i]);
 		}
 		int checkDigit = 11 - (sum % 11);
 

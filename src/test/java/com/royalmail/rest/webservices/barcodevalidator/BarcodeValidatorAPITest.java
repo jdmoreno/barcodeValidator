@@ -24,7 +24,7 @@ public class BarcodeValidatorAPITest {
 	private MockMvc mockMvc;
 
 	@Mock
-	Service barcodeValidatorService;
+	ValidationService barcodeValidatorService;
 
 	@Test
 	public void testSuccessWhenValidBarCode() throws Exception {

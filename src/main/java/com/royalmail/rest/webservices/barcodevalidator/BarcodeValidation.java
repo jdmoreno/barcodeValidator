@@ -1,6 +1,6 @@
 package com.royalmail.rest.webservices.barcodevalidator;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.royalmail.rest.webservices.barcodevalidator.model.Barcode;
 
@@ -11,8 +11,8 @@ import com.royalmail.rest.webservices.barcodevalidator.model.Barcode;
  * input serial number to verify its value.
  *
  */
-@Component
-public class ServiceImpl implements Service {
+@Service
+public class BarcodeValidation implements ValidationService {
 
 	/**
 	 * Returns

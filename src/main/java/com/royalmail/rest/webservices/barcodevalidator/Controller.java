@@ -12,7 +12,7 @@ public class Controller {
 	Logger logger = LoggerFactory.getLogger(Controller.class);
 	
 	@Autowired
-	private Service barcodeValidatorService;
+	private ValidationService barcodeValidatorService;
 
 	/**
 	 * This method gets the input barcode from the request parameter & invokes the

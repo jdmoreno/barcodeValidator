@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class BarcodeValidatorServiceTest {
 
 	@Autowired
-	private Service validationService;
+	private ValidationService validationService;
 	
     @Test
     public void testWithValidBarCode() {
