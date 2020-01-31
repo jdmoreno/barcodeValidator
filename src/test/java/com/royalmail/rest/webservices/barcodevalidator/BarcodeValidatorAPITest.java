@@ -17,8 +17,11 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 @AutoConfigureMockMvc
 public class BarcodeValidatorAPITest {
 
-	private static final String validBarcode = "AA473124829GB";
+	private static final String validBarcode = "AA473124829GB";	
+	private static final String validBarcode_5step = "AA022010000GB";
+	private static final String validBarcode_6step = "AA000000005GB";
 	private static final String invalidBarcode = "AA473124828GB";
+	private static final String invalidBarcode_short = "AA12GB";
 	
 	@Autowired
 	private MockMvc mockMvc;
@@ -33,6 +36,20 @@ public class BarcodeValidatorAPITest {
 	    		.andReturn();
 	}
 
+	@Test
+	public void testSuccessWhenValidBarCode_5step() throws Exception {
+	    mockMvc.perform(MockMvcRequestBuilders.get("/validate").param("barcode", validBarcode_5step)
+	    		.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andExpect(content().string("true"))
+	    		.andReturn();
+	}
+	
+	@Test
+	public void testSuccessWhenValidBarCode_6step() throws Exception {
+	    mockMvc.perform(MockMvcRequestBuilders.get("/validate").param("barcode", validBarcode_6step)
+	    		.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andExpect(content().string("true"))
+	    		.andReturn();
+	}
+	
 	@Test
 	public void testFailWhenInvalidBarCode() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.get("/validate").param("barcode", invalidBarcode)
@@ -49,7 +66,7 @@ public class BarcodeValidatorAPITest {
 
 	@Test
 	public void testFailWhenInvalidLengthBarCode() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/validate").param("barcode", "AA12GB")
+		mockMvc.perform(MockMvcRequestBuilders.get("/validate").param("barcode", invalidBarcode_short)
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andExpect(content().string("false"))
 				.andReturn();
 	}
