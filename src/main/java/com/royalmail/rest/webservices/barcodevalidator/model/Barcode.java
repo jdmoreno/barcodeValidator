@@ -32,40 +32,40 @@ public class Barcode {
 	 * @return
 	 */
 	
-	public static Barcode fromString(String sourceData) {
+	public static Barcode fromString(final String sourceData) {
 		if (StringUtils.isEmpty(sourceData)) {
 			return null;
 		}
-		
+
 		Barcode barcode = null;
-		Matcher matcher = Pattern.compile(BARCODEEX).matcher(sourceData);		
+		final Matcher matcher = Pattern.compile(BARCODEEX).matcher(sourceData);
 		if (matcher.find()) {
-			String prefixTmp = matcher.group(1);
-			String numberTmp = matcher.group(2);
-			String digitTmp = matcher.group(3);
-			String countryCode = matcher.group(4);
-			
+			final String prefixTmp = matcher.group(1);
+			final String numberTmp = matcher.group(2);
+			final String digitTmp = matcher.group(3);
+			final String countryCode = matcher.group(4);
+
 			if (Integer.parseInt(digitTmp) == calculateCheckDigit(numberTmp)) {
 				barcode = new Barcode(prefixTmp, numberTmp, digitTmp, countryCode);
-			} 
+			}
 		}
 		return barcode;
 	}
-	
+
 	/**
 	 * Generate a random barcode
 	 * 
 	 * @return
 	 */
 	public static Barcode generate() {
-		String prefixTmp = StringUtilities.generateAlphaString(2);
-		String numberTmp = StringUtilities.generateNumericString(8);
-		String digitTmp = Integer.toString(calculateCheckDigit(numberTmp));
-		String countryCode = "GB";		
+		final String prefixTmp = StringUtilities.generateAlphaString(2);
+		final String numberTmp = StringUtilities.generateNumericString(8);
+		final String digitTmp = Integer.toString(calculateCheckDigit(numberTmp));
+		final String countryCode = "GB";
 		return new Barcode(prefixTmp, numberTmp, digitTmp, countryCode);
 	}
-	
-	private static int calculateCheckDigit(String sourceData) {
+
+	private static int calculateCheckDigit(final String sourceData) {
 		int sum = 0;
 		for (int i = 0; i < WEIGHTAGE.length; i++) {			
 			sum += (Character.getNumericValue(sourceData.charAt(i)) * WEIGHTAGE[i]);

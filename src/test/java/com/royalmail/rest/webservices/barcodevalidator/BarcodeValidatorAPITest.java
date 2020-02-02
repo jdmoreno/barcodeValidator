@@ -70,4 +70,5 @@ public class BarcodeValidatorAPITest {
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andExpect(content().string("false"))
 				.andReturn();
 	}
+    
 }
